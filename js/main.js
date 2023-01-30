@@ -1,5 +1,7 @@
 let cr7 = document.querySelector('.robo')
 const controles = document.querySelectorAll('[data-controle]') 
+const estatisticas = document.querySelectorAll('[data-estatistica]')
+console.log(estatisticas)
 const pecas = {
     "bracos": {
         "forca": 29,
@@ -41,6 +43,8 @@ cr7.addEventListener('click', ()=>{
 controles.forEach(element => {
     element.addEventListener('click', (event)=>{
         manipulaDados(event.target.dataset.controle, event.target.parentNode)
+        console.log(event.target.dataset)
+        atualizaEstatistica(event.target.dataset.peca)
     })
 });
 
@@ -53,4 +57,9 @@ function manipulaDados(operacao, controle) {
         peca.value = parseInt(peca.value) + 1
     }
     
+}
+function atualizaEstatistica(peca) {
+    estatisticas.forEach((element) =>{
+        element.textContent = parseInt(element.textContent) + pecas[peca][element.dataset.estatistica]
+    })
 }
